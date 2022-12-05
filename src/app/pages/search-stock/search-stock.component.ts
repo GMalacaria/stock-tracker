@@ -30,49 +30,61 @@ export class SearchStockComponent implements OnInit {
   }
 
   searchStock(form: NgForm): void {
-    this.msg.nativeElement.className = null;
+    this.resetMessage();
     let symbol = form.value.stockInput;
     this.disabledSub.next(true);
     this.message = 'Loading';
     this.points = '';
     let intervalPoint = setInterval(() => this.textLoading(), 300);
     if (!this.stocks.find((stock) => stock.symbol === symbol)) {
-      this.searchStockService
-        .getSymbolQuote(symbol)
-        .pipe(
-          finalize(() => {
-            this.disabledSub.next(false);
-            this.stopLoading(intervalPoint);
-          })
-        )
-        .subscribe({
-          error: (e) => {
-            console.log(e);
-          },
-          next: (stock) => {
-            if (stock?.symbol) {
-              this._setStorageStoke(stock);
-              this.message = '';
-            } else {
-              this.message = 'No stock found';
-              this.msg.nativeElement.className = 'error';
-              setTimeout(() => {
-                this.message = '';
-                this.msg.nativeElement.className = null;
-              }, 4000);
-            }
-          },
-        });
+      this._getSymbolQuote(symbol, intervalPoint, form);
     } else {
       this.disabledSub.next(false);
       this.stopLoading(intervalPoint);
       this.message = 'Stock present in list';
       this.msg.nativeElement.className = 'warning';
       setTimeout(() => {
-        this.message = '';
-        this.msg.nativeElement.className = null;
+        this.resetMessage();
       }, 4000);
     }
+  }
+
+  private _getSymbolQuote(symbol: string, intervalPoint, form: NgForm): void {
+    this.searchStockService
+      .getSymbolQuote(symbol)
+      .pipe(
+        finalize(() => {
+          this.disabledSub.next(false);
+          this.stopLoading(intervalPoint);
+        })
+      )
+      .subscribe({
+        error: (e) => {
+          this.message = 'Error';
+          this.msg.nativeElement.className = 'error';
+          setTimeout(() => {
+            this.resetMessage();
+          }, 4000);
+        },
+        next: (stock) => {
+          if (stock?.symbol) {
+            this._setStorageStoke(stock);
+            this.resetMessage();
+            form.reset();
+          } else {
+            this.message = 'No stock found';
+            this.msg.nativeElement.className = 'error';
+            setTimeout(() => {
+              this.resetMessage();
+            }, 4000);
+          }
+        },
+      });
+  }
+
+  resetMessage(): void {
+    this.message = '';
+    this.msg.nativeElement.className = null;
   }
 
   textLoading() {
@@ -104,13 +116,12 @@ export class SearchStockComponent implements OnInit {
     this.msg.nativeElement.className = 'success';
     this.message = 'Stock successfully removed';
     setTimeout(() => {
-      this.message = '';
-      this.msg.nativeElement.className = null;
+      this.resetMessage();
     }, 3000);
   }
 
   startLoading(): void {
-    this.msg.nativeElement.className = null;
+    this.resetMessage();
     this.message = 'Loading';
     setInterval(() => this.textLoading(), 300);
   }
@@ -134,7 +145,7 @@ export class SearchStockComponent implements OnInit {
         .map((s) => this.searchStockService.getSymbolQuote(s));
       forkJoin(arrayObs$).subscribe((stocks) => {
         clearInterval(intervalPoint);
-        this.message = '';
+        this.resetMessage();
         this.stocks = stocks;
       });
     }
