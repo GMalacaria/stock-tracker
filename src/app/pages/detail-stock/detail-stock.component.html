@@ -29,22 +29,21 @@
           </ng-template>
         </div>
         <div class="d-block-inline m-auto">
-          <iframe
+          <img
             *ngIf="track?.change > 0; else arrowDown"
             class="arrow top"
             name="arrowTop"
             title="Top"
-            src="../../../../assets/arrow-top.svg"
-          ></iframe>
+            src="/assets/arrow-top.svg"
+          />
           <ng-template #arrowDown>
-            <iframe
+            <img
               *ngIf="track?.change < 0"
               class="arrow down"
               name="arrowDown"
               title="Down"
-              src="../../../../assets/arrow-down.svg"
-            ></iframe
-          ></ng-template>
+              src="/assets/arrow-down.svg"
+          /></ng-template>
         </div>
       </div>
     </div>
