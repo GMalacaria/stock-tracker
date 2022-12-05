@@ -1,0 +1,37 @@
+<div class="content" role="main">
+  <!-- Terminal -->
+  <div class="terminal">
+    <div class="d-block">
+      <span>Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)</span>
+    </div>
+    <div class="d-block input-padding">
+      <form (ngSubmit)="searchStock(f)" #f="ngForm">
+        <input
+          ngModel
+          maxlength="5"
+          minlength="1"
+          type="text"
+          id="stockInput"
+          name="stockInput"
+          #stockInput
+          (input)="valuechange($event.target.value)"
+        />
+        <button type="submit" id="trackBtn" [disabled]="disabledSub | async">
+          Track Stock
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<div #msg id="msg">
+  <span *ngIf="message">
+    {{ message }}<span *ngIf="points">{{ points }}</span>
+  </span>
+</div>
+
+<app-list-stocks
+  *ngIf="stocks.length"
+  [stocks]="stocks"
+  (removeStockStorage)="removeStock($event)"
+  (startLoading)="startLoading()"
+></app-list-stocks>

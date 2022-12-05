@@ -1,0 +1,97 @@
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+
+.terminal {
+  position: relative;
+  width: 90%;
+  border: 3px solid black;
+  padding: 15px 10px 15px 30px;
+  margin-bottom: 15px;
+}
+#message {
+  margin-left: 45%;
+}
+
+button {
+  border: 3px solid black;
+  box-shadow: 4px 4px 2px -2px black;
+  width: 215px;
+  border-radius: unset;
+  margin-left: 5%;
+  background-color: unset;
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(2px) translateX(2px);
+}
+
+.d-block {
+  display: block;
+}
+
+.row-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row-title span {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.mr-2 {
+  margin-right: 8px;
+}
+.mt-2 {
+  margin-top: 8px;
+}
+.mr_30 {
+  margin-right: 30px;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.d-flex {
+  display: flex;
+}
+.arrow {
+  border: 0;
+  width: 70px;
+  height: 50px;
+}
+
+.arrow.top {
+  transform: rotate(270deg);
+}
+.arrow.down {
+  transform: rotate(90deg);
+}
+
+.close-svg {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.block-svg {
+  margin-left: 15%;
+}
+.content {
+  margin-bottom: 0;
+}
+.m-auto {
+  margin: auto;
+}
+.font-size-16 {
+  font-size: 16px;
+}
+#container {
+  min-width: 180px;
+}
+.notFound {
+  margin-top: 15%;
+}

@@ -1,0 +1,57 @@
+<div class="content">
+  <!-- Terminal -->
+  <div class="terminal" *ngIf="sentiment?.insider">
+    <div class="row-title">
+      <span
+        >{{ sentiment?.stock.description }} ({{ sentiment.stock.symbol }})</span
+      >
+    </div>
+
+    <div class="d-flex d-block-inline justify-content-between">
+      <div
+        class="d-flex"
+        *ngFor="let track of sentiment.insider"
+        id="container"
+      >
+        <div class="d-block-inline">
+          <span class="d-block mt-2 font-size-16">
+            {{ track?.month | dateByMonth | date : "MMMM" | uppercase }}</span
+          >
+          <div *ngIf="track?.symbol; else notFound">
+            <span class="d-block mt-2"
+              >Change: <span *ngIf="track?.change > 0">+</span
+              >{{ track?.change }}</span
+            >
+            <span class="d-block mt-2">MSPR: {{ track?.mspr }}</span>
+          </div>
+          <ng-template #notFound>
+            <div class="notFound">No data available</div>
+          </ng-template>
+        </div>
+        <div class="d-block-inline m-auto">
+          <iframe
+            *ngIf="track?.change > 0; else arrowDown"
+            class="arrow top"
+            name="arrowTop"
+            title="Top"
+            src="../../../../assets/arrow-top.svg"
+          ></iframe>
+          <ng-template #arrowDown>
+            <iframe
+              *ngIf="track?.change < 0"
+              class="arrow down"
+              name="arrowDown"
+              title="Down"
+              src="../../../../assets/arrow-down.svg"
+            ></iframe
+          ></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <button (click)="goToList()" id="backBtn">
+    {{ "< Back to list of sentiments" }}
+  </button>
+</div>

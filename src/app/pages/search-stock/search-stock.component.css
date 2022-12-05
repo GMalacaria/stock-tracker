@@ -1,0 +1,70 @@
+.terminal {
+  position: relative;
+  width: 90%;
+  border: 3px solid black;
+  padding: 15px 10px 15px 30px;
+  overflow: hidden;
+}
+#msg {
+  margin-left: 45%;
+}
+
+input {
+  border: 3px solid black;
+  max-width: 80px;
+  border-radius: unset;
+}
+
+button {
+  border: 3px solid black;
+  box-shadow: 4px 4px 2px -2px black;
+  width: 115px;
+  border-radius: unset;
+  margin-left: 40px;
+  background-color: unset;
+  cursor: pointer;
+  font-size: 14px;
+}
+button:disabled {
+  cursor: no-drop;
+}
+
+button:active:disabled {
+  transform: none;
+}
+
+button:active:not(disabled) {
+  transform: translateY(2px) translateX(2px);
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.warning {
+  color: orange;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+svg#clouds {
+  position: fixed;
+  bottom: -160px;
+  left: -230px;
+  z-index: -10;
+  width: 1920px;
+}
+
+.d-block {
+  display: block;
+}
+
+.input-padding {
+  padding-top: 20px;
+  padding-left: 50px;
+}

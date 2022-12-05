@@ -1,0 +1,54 @@
+<div class="content">
+  <!-- Terminal -->
+  <div class="terminal" *ngFor="let stock of stocks">
+    <div class="row-title">
+      <span>{{ stock?.description }} ({{ stock.symbol }})</span>
+      <div class="mr-2" [id]="'remove' + stock.symbol">
+        <img
+          (click)="removeStock(stock?.symbol)"
+          class="close-svg"
+          src="../../../../assets/close.svg"
+        />
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="d-block-inline mr_30">
+        <span class="d-block mt-2"
+          >Change today: <span *ngIf="stock.quote.d > 0">+</span
+          >{{ stock.quote.d }}%</span
+        >
+        <span class="d-block mt-2">Current price: ${{ stock.quote.c }}%</span>
+      </div>
+      <div class="d-block-inline mr_30">
+        <span class="d-block mt-2">Opening price: ${{ stock.quote.o }}</span>
+        <span class="d-block mt-2">High price: ${{ stock.quote.h }}</span>
+      </div>
+      <div>
+        <iframe
+          *ngIf="stock.quote.d > 0; else arrowDown"
+          class="arrow top"
+          name="arrowTop"
+          title="Top"
+          src="../../../../assets/arrow-top.svg"
+        ></iframe>
+        <ng-template #arrowDown>
+          <iframe
+            *ngIf="stock.quote.d < 0"
+            class="arrow down"
+            name="arrowDown"
+            title="Down"
+            src="../../../../assets/arrow-down.svg"
+          ></iframe
+        ></ng-template>
+      </div>
+    </div>
+    <div class="d-flex">
+      <button
+        (click)="goToDetail(stock.symbol)"
+        [id]="'sentiment' + stock.symbol"
+      >
+        Go to social sentiment details >
+      </button>
+    </div>
+  </div>
+</div>
