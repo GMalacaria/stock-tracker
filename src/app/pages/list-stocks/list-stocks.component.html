@@ -24,22 +24,21 @@
         <span class="d-block mt-2">High price: ${{ stock.quote.h }}</span>
       </div>
       <div>
-        <iframe
+        <img
           *ngIf="stock.quote.d > 0; else arrowDown"
           class="arrow top"
           name="arrowTop"
           title="Top"
           src="../../../../assets/arrow-top.svg"
-        ></iframe>
+        />
         <ng-template #arrowDown>
-          <iframe
+          <img
             *ngIf="stock.quote.d < 0"
             class="arrow down"
             name="arrowDown"
             title="Down"
             src="../../../../assets/arrow-down.svg"
-          ></iframe
-        ></ng-template>
+        /></ng-template>
       </div>
     </div>
     <div class="d-flex">
